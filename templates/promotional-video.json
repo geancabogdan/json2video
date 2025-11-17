@@ -7,10 +7,6 @@
       "duration": 2,
       "layers": [
         {
-          "type": "fill",
-          "color": "{{BACKGROUND_COLOR}}"
-        },
-        {
           "type": "image",
           "path": "{{BACKGROUND_IMAGE}}",
           "duration": 2
@@ -21,8 +17,9 @@
       "duration": 3,
       "layers": [
         {
-          "type": "fill",
-          "color": "{{BACKGROUND_COLOR}}"
+          "type": "image",
+          "path": "{{BACKGROUND_IMAGE}}",
+          "duration": 3
         },
         {
           "type": "text",
@@ -45,10 +42,6 @@
       "duration": 4,
       "layers": [
         {
-          "type": "fill",
-          "color": "{{BACKGROUND_COLOR}}"
-        },
-        {
           "type": "video",
           "path": "{{PRODUCT_VIDEO}}",
           "duration": 4
@@ -63,8 +56,9 @@
       "duration": 2,
       "layers": [
         {
-          "type": "fill",
-          "color": "{{BACKGROUND_COLOR}}"
+          "type": "image",
+          "path": "{{BACKGROUND_IMAGE}}",
+          "duration": 2
         },
         {
           "type": "text",
