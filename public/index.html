@@ -463,7 +463,7 @@
         const newClip = {
           id: Date.now(),
           duration: 4,
-          transition: { name: 'crossFade', duration: 0.5 },
+          transition: { name: 'fade', duration: 0.5 },
           layers: [{ type: 'fill-color', color: '#667eea' }],
         };
         setClips([...clips, newClip]);
@@ -713,20 +713,30 @@
                           <div className="form-group">
                             <label>Transition Type</label>
                             <select
-                              value={clip.transition?.name || 'crossFade'}
+                              value={clip.transition?.name || 'fade'}
                               onChange={(e) =>
                                 updateClip(clip.id, {
                                   transition: { ...clip.transition, name: e.target.value },
                                 })
                               }
                             >
-                              <option value="crossFade">Cross Fade</option>
-                              <option value="circleOpen">Circle Open</option>
-                              <option value="slideRight">Slide Right</option>
-                              <option value="slideLeft">Slide Left</option>
-                              <option value="directionalWipes">Directional Wipes</option>
-                              <option value="waterDrop">Water Drop</option>
-                              <option value="bounce">Bounce</option>
+                              <option value="random">Random</option>
+                              <option value="fade">Fade</option>
+                              <option value="CircleCrop">Circle Crop</option>
+                              <option value="circleopen">Circle Open</option>
+                              <option value="CrossZoom">Cross Zoom</option>
+                              <option value="Directional">Directional</option>
+                              <option value="wipeRight">Wipe Right</option>
+                              <option value="wipeLeft">Wipe Left</option>
+                              <option value="wipeDown">Wipe Down</option>
+                              <option value="wipeUp">Wipe Up</option>
+                              <option value="WaterDrop">Water Drop</option>
+                              <option value="Bounce">Bounce</option>
+                              <option value="Swirl">Swirl</option>
+                              <option value="Mosaic">Mosaic</option>
+                              <option value="burn">Burn</option>
+                              <option value="Radial">Radial</option>
+                              <option value="SimpleZoom">Simple Zoom</option>
                             </select>
                           </div>
 
