@@ -1,0 +1,36 @@
+FROM node:lts-bookworm
+
+# Install runtime dependencies (including build tools for canvas native bindings)
+RUN apt-get update -y \
+  && apt-get -y install \
+    ffmpeg \
+    libcairo2 \
+    libpango1.0 \
+    libgif7 \
+    librsvg2-2 \
+    build-essential \
+    libcairo2-dev \
+    libgif-dev \
+    libjpeg-dev \
+    libpango1.0-dev \
+    pkg-config \
+    python3 \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+WORKDIR /app
+
+# Copy all files
+COPY . .
+
+# Install dependencies
+RUN npm install --no-fund --no-audit
+
+# Build TypeScript
+RUN npm run build
+
+# Ensure npm link works
+RUN npm link || true
+
+EXPOSE 5000
+
+CMD [ "npm", "run", "dev" ]
