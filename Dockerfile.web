@@ -1,20 +1,25 @@
 FROM node:lts-bookworm
 
-# Install runtime dependencies (including build tools for canvas native bindings)
+# Install runtime dependencies (including build tools for native bindings)
 RUN apt-get update -y \
   && apt-get -y install \
     ffmpeg \
-    libcairo2 \
-    libpango1.0 \
-    libgif7 \
-    librsvg2-2 \
     build-essential \
+    python3 \
+    pkg-config \
+    libcairo2 \
     libcairo2-dev \
+    libgif7 \
     libgif-dev \
     libjpeg-dev \
+    libpango1.0 \
     libpango1.0-dev \
-    pkg-config \
-    python3 \
+    librsvg2-2 \
+    librsvg2-dev \
+    libgl1-mesa-dev \
+    libglew-dev \
+    libglu1-mesa-dev \
+    libxi-dev \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 WORKDIR /app
