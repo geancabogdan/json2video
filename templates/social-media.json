@@ -7,10 +7,6 @@
       "duration": 1.5,
       "layers": [
         {
-          "type": "fill",
-          "color": "{{BRAND_COLOR}}"
-        },
-        {
           "type": "text",
           "text": "{{TITLE}}",
           "fontSize": 60,
@@ -55,10 +51,6 @@
     {
       "duration": 2,
       "layers": [
-        {
-          "type": "fill",
-          "color": "{{BRAND_COLOR}}"
-        },
         {
           "type": "text",
           "text": "{{TAGLINE}}",
