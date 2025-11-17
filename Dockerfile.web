@@ -1,6 +1,6 @@
 FROM node:lts-bookworm
 
-# Install runtime dependencies (including build tools for native bindings)
+# Install runtime dependencies (including build tools for native bindings and xvfb for OpenGL)
 RUN apt-get update -y \
   && apt-get -y install \
     ffmpeg \
@@ -21,6 +21,8 @@ RUN apt-get update -y \
     libglew-dev \
     libglu1-mesa-dev \
     libxi-dev \
+    xvfb \
+    dumb-init \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 WORKDIR /app
@@ -39,4 +41,5 @@ RUN npm link || true
 
 EXPOSE 5000
 
+ENTRYPOINT ["/usr/bin/dumb-init", "--", "xvfb-run", "--server-args", "-screen 0 1280x1024x24 -ac"]
 CMD [ "npm", "run", "dev" ]
