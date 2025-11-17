@@ -7,16 +7,11 @@
       "duration": 1.5,
       "layers": [
         {
-          "type": "text",
+          "type": "title",
           "text": "{{TITLE}}",
           "fontSize": 60,
           "fontFamily": "Arial",
-          "fontWeight": "bold",
-          "color": "#FFFFFF",
-          "position": {
-            "x": 0.5,
-            "y": 0.4
-          }
+          "color": "#FFFFFF"
         }
       ]
     },
@@ -52,15 +47,11 @@
       "duration": 2,
       "layers": [
         {
-          "type": "text",
+          "type": "title",
           "text": "{{TAGLINE}}",
           "fontSize": 50,
           "fontFamily": "Arial",
-          "color": "#FFFFFF",
-          "position": {
-            "x": 0.5,
-            "y": 0.5
-          }
+          "color": "#FFFFFF"
         }
       ],
       "transition": {

@@ -22,15 +22,11 @@
           "duration": 3
         },
         {
-          "type": "text",
+          "type": "title",
           "text": "{{HEADLINE}}",
           "fontSize": 80,
           "fontFamily": "Arial",
-          "color": "#FFFFFF",
-          "position": {
-            "x": 0.5,
-            "y": 0.3
-          }
+          "color": "#FFFFFF"
         }
       ],
       "transition": {
@@ -61,15 +57,11 @@
           "duration": 2
         },
         {
-          "type": "text",
+          "type": "title",
           "text": "{{CTA_TEXT}}",
           "fontSize": 60,
           "fontFamily": "Arial",
-          "color": "#FFFFFF",
-          "position": {
-            "x": 0.5,
-            "y": 0.5
-          }
+          "color": "#FFFFFF"
         }
       ],
       "transition": {
