@@ -1,0 +1,88 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "clips": [
+    {
+      "duration": 2,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BACKGROUND_COLOR}}"
+        },
+        {
+          "type": "image",
+          "path": "{{BACKGROUND_IMAGE}}",
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BACKGROUND_COLOR}}"
+        },
+        {
+          "type": "text",
+          "text": "{{HEADLINE}}",
+          "fontSize": 80,
+          "fontFamily": "Arial",
+          "color": "#FFFFFF",
+          "position": {
+            "x": 0.5,
+            "y": 0.3
+          }
+        }
+      ],
+      "transition": {
+        "name": "fade",
+        "duration": 0.5
+      }
+    },
+    {
+      "duration": 4,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BACKGROUND_COLOR}}"
+        },
+        {
+          "type": "video",
+          "path": "{{PRODUCT_VIDEO}}",
+          "duration": 4
+        }
+      ],
+      "transition": {
+        "name": "fade",
+        "duration": 0.5
+      }
+    },
+    {
+      "duration": 2,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BACKGROUND_COLOR}}"
+        },
+        {
+          "type": "text",
+          "text": "{{CTA_TEXT}}",
+          "fontSize": 60,
+          "fontFamily": "Arial",
+          "color": "#FFFFFF",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          }
+        }
+      ],
+      "transition": {
+        "name": "fade",
+        "duration": 0.5
+      }
+    }
+  ],
+  "audioFilePath": "{{MUSIC_PATH}}"
+}

@@ -1,0 +1,81 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "clips": [
+    {
+      "duration": 1.5,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BRAND_COLOR}}"
+        },
+        {
+          "type": "text",
+          "text": "{{TITLE}}",
+          "fontSize": 60,
+          "fontFamily": "Arial",
+          "fontWeight": "bold",
+          "color": "#FFFFFF",
+          "position": {
+            "x": 0.5,
+            "y": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "duration": 3,
+      "layers": [
+        {
+          "type": "image",
+          "path": "{{IMAGE_1}}",
+          "duration": 3
+        }
+      ],
+      "transition": {
+        "name": "fade",
+        "duration": 0.5
+      }
+    },
+    {
+      "duration": 3,
+      "layers": [
+        {
+          "type": "image",
+          "path": "{{IMAGE_2}}",
+          "duration": 3
+        }
+      ],
+      "transition": {
+        "name": "wipeRight",
+        "duration": 0.5
+      }
+    },
+    {
+      "duration": 2,
+      "layers": [
+        {
+          "type": "fill",
+          "color": "{{BRAND_COLOR}}"
+        },
+        {
+          "type": "text",
+          "text": "{{TAGLINE}}",
+          "fontSize": 50,
+          "fontFamily": "Arial",
+          "color": "#FFFFFF",
+          "position": {
+            "x": 0.5,
+            "y": 0.5
+          }
+        }
+      ],
+      "transition": {
+        "name": "crossZoom",
+        "duration": 0.5
+      }
+    }
+  ],
+  "audioFilePath": "{{AUDIO_PATH}}"
+}
