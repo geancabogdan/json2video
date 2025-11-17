@@ -1,0 +1,170 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║         🔧 INSTALL GOOGLE CLOUD SDK (gcloud) - Windows                      ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+The "gcloud" command is not installed. Here's how to fix it:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ QUICK OPTION: Use Google Cloud Console (Easiest!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You can do everything in the Cloud Console instead!
+
+Steps:
+
+1. Open: https://console.cloud.google.com/
+
+2. Log in with your Google account
+
+3. In the top right, click the ">_" icon (Cloud Shell)
+   - A terminal opens at the bottom
+
+4. You'll be in a Linux terminal (not Windows!)
+   - gcloud is already installed there!
+
+5. Copy and paste the scp command (but modify it):
+
+Instead of:
+  gcloud compute scp --recursive C:\Users\sorin\Desktop\json2video/* ...
+
+It should be (for Cloud Shell):
+  - First upload your project as a ZIP
+  - Or use Git to clone it
+
+Actually, EASIER WAY in Cloud Shell:
+
+  gcloud compute scp --recursive ~/my-project-files instance-20251117-105725:/opt/editly/
+
+See OPTION 2 below for detailed Cloud Shell steps.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📥 OPTION 1: Install Google Cloud SDK on Windows
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Takes 5 minutes.
+
+Step 1: Download the installer
+  - Go to: https://cloud.google.com/sdk/docs/install
+  - Click "Windows" (if not already selected)
+  - Click "Installer (.exe)"
+  - Download google-cloud-sdk-*.exe
+
+Step 2: Run the installer
+  - Double-click the .exe file
+  - Follow the installation wizard
+  - Accept all defaults
+  - It will ask to install Python - let it
+
+Step 3: Restart your computer
+  - Close and reopen PowerShell
+
+Step 4: Verify installation
+  - Open PowerShell
+  - Run: gcloud --version
+  - Should show version number
+
+Step 5: Authenticate
+  - Run: gcloud auth login
+  - Browser opens
+  - Log in with your Google account
+  - Click "Allow"
+
+Step 6: Set your project
+  - Run: gcloud config set project YOUR_PROJECT_ID
+  - Replace YOUR_PROJECT_ID with your GCP project
+
+Now you can use gcloud commands!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+☁️ OPTION 2: Use Google Cloud Shell (No Installation Needed!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This is EASIER - Cloud Shell has gcloud pre-installed!
+
+Step 1: Open Google Cloud Console
+  - Go to: https://console.cloud.google.com/
+
+Step 2: Click the ">_" icon (Cloud Shell) in top right
+  - Terminal opens at bottom of screen
+  - Already in Linux environment
+  - gcloud ready to use
+
+Step 3: Upload your project files
+
+  Option A - Using git (if your project is on GitHub):
+    git clone https://github.com/your-username/json2video
+    cd json2video
+
+  Option B - Upload via Cloud Console:
+    - Click the "..." menu in Cloud Shell
+    - Click "Upload file"
+    - Select your project folder/ZIP
+    - Wait for upload
+
+Step 4: Copy files to your instance
+
+  mkdir -p /opt/editly
+
+  Then SSH into your instance and copy files:
+    gcloud compute scp --recursive /tmp/uploaded-files/* instance-20251117-105725:/opt/editly/ --zone=us-central1-a
+
+Step 5: Continue with rest of deployment
+
+This avoids installing gcloud locally!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ MY RECOMMENDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPTION 2 (Cloud Shell) is EASIEST because:
+  ✅ No installation needed
+  ✅ No authentication needed
+  ✅ Already in the right environment
+  ✅ Works immediately
+
+Pick OPTION 2 if you want to start now!
+
+Pick OPTION 1 if you prefer local gcloud for future use.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK CLOUD SHELL STEPS (Do This!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open: https://console.cloud.google.com/
+
+2. Click ">_" icon in top right → Cloud Shell opens
+
+3. Wait for terminal to load
+
+4. Create destination folder:
+   mkdir /opt/editly
+
+5. Upload your project:
+   - Click "..." menu
+   - "Upload file"
+   - Select json2video folder (or ZIP it first)
+   - Wait for upload
+
+6. Copy to instance:
+   gcloud compute scp --recursive /home/YOUR_EMAIL/json2video/* instance-20251117-105725:/opt/editly/ --zone=us-central1-a
+
+7. Then SSH from Cloud Shell:
+   gcloud compute ssh instance-20251117-105725 --zone=us-central1-a
+
+8. Continue with npm install, npm run build, node server.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Which option do you want to use?
+
+OPTION 1: Install gcloud locally (5 min)
+OPTION 2: Use Cloud Shell (fastest!)
+
+Let me know which one and I'll help you through it!

@@ -1,0 +1,70 @@
+{
+  // Test video configuration for Docker
+  outPath: "./outputs/test-video.mp4",
+  width: 1280,
+  height: 720,
+  fps: 30,
+
+  clips: [
+    // Slide 1: Blue background with title
+    {
+      duration: 2,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#1e88e5', // Blue
+        },
+        {
+          type: 'title',
+          text: 'Welcome to Editly',
+          fontSize: 100,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        }
+      ]
+    },
+
+    // Slide 2: Green background with subtitle
+    {
+      duration: 2,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#43a047', // Green
+        },
+        {
+          type: 'title',
+          text: 'Video Generation Success!',
+          fontSize: 80,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        },
+        {
+          type: 'subtitle',
+          text: 'Created with Declarative Configuration',
+          fontSize: 50,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        }
+      ]
+    },
+
+    // Slide 3: Red background with text
+    {
+      duration: 2,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#e53935', // Red
+        },
+        {
+          type: 'title',
+          text: 'Run Editly Tests',
+          fontSize: 90,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        }
+      ]
+    }
+  ]
+}

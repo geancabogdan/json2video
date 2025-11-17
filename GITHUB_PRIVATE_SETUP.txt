@@ -1,0 +1,288 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║         🔐 CREATE PRIVATE GITHUB REPO & UPLOAD PROJECT                      ║
+║                                                                              ║
+║         Account: geancabogdan                                               ║
+║         Project: json2video-web (PRIVATE)                                   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 1: CREATE PRIVATE GITHUB REPOSITORY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to: https://github.com/new
+
+2. Fill in these fields:
+
+   Repository name: json2video-web
+
+   Description: Editly Web Interface - Video Editor
+
+   Visibility: PRIVATE ← IMPORTANT!
+
+   Initialize this repository with: (leave EMPTY)
+
+3. Click "Create repository"
+
+4. You'll see a page with setup instructions - FOLLOW THE NEXT STEPS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 STEP 2: INITIALIZE GIT & PUSH TO GITHUB (Windows PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open PowerShell and run these commands ONE AT A TIME:
+
+Command 2a - Go to project folder:
+
+cd C:\Users\sorin\Desktop\json2video
+
+---
+
+Command 2b - Initialize git:
+
+git init
+
+---
+
+Command 2c - Add all files:
+
+git add .
+
+---
+
+Command 2d - First commit:
+
+git commit -m "Initial commit: Editly web video editor with cloud deployment"
+
+---
+
+Command 2e - Rename branch to main:
+
+git branch -M main
+
+---
+
+Command 2f - Add GitHub remote:
+
+git remote add origin https://github.com/geancabogdan/json2video-web.git
+
+---
+
+Command 2g - Push to GitHub:
+
+git push -u origin main
+
+⚠️ WHEN IT ASKS FOR PASSWORD:
+
+  Username: geancabogdan
+
+  Password: You need a GitHub Personal Access Token (NOT your password!)
+
+  How to get Personal Access Token:
+    1. Go to: https://github.com/settings/tokens
+    2. Click "Generate new token (classic)"
+    3. Give it a name: "editly-deploy"
+    4. Check the "repo" checkbox
+    5. Scroll down and click "Generate token"
+    6. COPY THE TOKEN (it won't show again!)
+    7. Paste it in PowerShell when asked for password
+
+Wait for message: ✅ Everything up-to-date
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFY ON GITHUB
+
+Go to: https://github.com/geancabogdan/json2video-web
+
+You should see:
+  ✅ "PRIVATE" label
+  ✅ All your project files
+  ✅ Latest commit message
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 3: CLONE TO GOOGLE CLOUD (In SSH Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In your SSH terminal (connected to Google Cloud instance), run:
+
+Command 3a - Go to /opt:
+
+cd /opt
+
+---
+
+Command 3b - Clone the repository:
+
+git clone https://github.com/geancabogdan/json2video-web.git editly
+
+⚠️ SINCE IT'S PRIVATE, IT WILL ASK FOR CREDENTIALS:
+
+  Username: geancabogdan
+
+  Password: Use the same Personal Access Token from Step 2
+
+---
+
+Command 3c - Go into project:
+
+cd editly
+
+---
+
+Verify files are there:
+
+ls -la
+
+You should see your project files!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 STEP 4: INSTALL DEPENDENCIES (In SSH Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Command 4a - Update packages:
+
+sudo apt-get update -y
+
+---
+
+Command 4b - Install Node.js:
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+---
+
+Command 4c - Install Node.js and FFmpeg:
+
+sudo apt-get install -y nodejs ffmpeg
+
+---
+
+Verify all installed:
+
+node --version
+npm --version
+ffmpeg -version
+
+All three should show version numbers!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 STEP 5: BUILD & START SERVER (In SSH Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Command 5a - Install npm dependencies:
+
+npm install
+
+Wait 1-2 minutes
+
+---
+
+Command 5b - Build the project:
+
+npm run build
+
+Wait for completion
+
+---
+
+Command 5c - START THE SERVER:
+
+node server.js
+
+IMPORTANT: Wait for this message:
+
+✨ Editly Web Server running at http://localhost:5000
+📂 Uploads: /opt/editly/uploads
+📤 Outputs: /opt/editly/outputs
+
+✅ SERVER IS RUNNING!
+
+⚠️ DO NOT CLOSE THIS SSH WINDOW - KEEP IT RUNNING!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 STEP 6: CONFIGURE FIREWALL (New PowerShell Window)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ DO NOT CLOSE THE SSH WINDOW! Open a NEW PowerShell!
+
+Command 6 - Allow port 5000:
+
+gcloud compute firewall-rules create allow-editly --allow=tcp:5000 --source-ranges=0.0.0.0/0
+
+Wait for success
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 7: GET YOUR PUBLIC IP (Same PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In the NEW PowerShell, run:
+
+gcloud compute instances describe instance-20251117-105725 --zone=us-central1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+
+You'll get: 35.xxx.xxx.xxx
+
+SAVE THIS IP!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 STEP 8: OPEN IN YOUR BROWSER!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open your web browser and go to:
+
+http://35.xxx.xxx.xxx:5000
+
+Replace 35.xxx.xxx.xxx with YOUR actual IP from Step 7!
+
+You should see:
+  ✅ Purple/blue beautiful interface
+  ✅ "Clips" panel on left
+  ✅ "Visual Editor" in center
+  ✅ "Render Jobs" on right
+
+✅ YOU'RE DONE! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎬 TRY YOUR VIDEO EDITOR!
+
+1. Click "+ Add Clip"
+2. Choose "Solid Color"
+3. Set color to: #667EEA
+4. Duration: 3 seconds
+5. Click "Render Video"
+6. Download when complete!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ KEEP SSH RUNNING!
+
+The SSH window with the server should stay open.
+
+To keep running after closing:
+  1. Press Ctrl+C to stop server
+  2. Run: nohup node server.js > server.log 2>&1 &
+  3. Server keeps running in background!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ready? Start with Step 1 - Create the private GitHub repo!
+
+Tell me when:
+  ✅ GitHub repo created (PRIVATE)
+  ✅ Files pushed (git push)
+  ✅ Cloned to cloud
+  ✅ Server running
+  ✅ You have the IP
+  ✅ You see the editor!
+
+I'm here to help! 🚀

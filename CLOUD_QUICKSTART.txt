@@ -1,0 +1,130 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║            Deploy Editly to Google Cloud - QUICK START (10 mins)            ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+YOUR INSTANCE:
+  Name: instance-20251117-105725
+  User: sos_sorin30
+  OS: Debian Linux
+  Zone: us-central1-a (likely)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Build Project (Windows Machine)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cd C:\Users\sorin\Desktop\json2video
+  npm run build
+
+  ✅ This creates the dist/ folder needed for the server
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 2: Copy Project to Cloud (Windows PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  gcloud compute scp --recursive C:\Users\sorin\Desktop\json2video/* instance-20251117-105725:/opt/editly/ --zone=us-central1-a
+
+  ✅ This uploads your entire project to the cloud
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 3: Open SSH Connection (Windows PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  gcloud compute ssh instance-20251117-105725 --zone=us-central1-a
+
+  ✅ You're now connected to your Linux instance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 4: Install Dependencies (In SSH Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  sudo apt-get update -y
+  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  sudo apt-get install -y nodejs ffmpeg
+
+  ✅ This installs Node.js and FFmpeg on the cloud server
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 5: Build and Start Server (In SSH Terminal)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cd /opt/editly
+  npm install
+  npm run build
+  node server.js
+
+  ✅ Server is now running!
+
+  Expected output:
+  ✨ Editly Web Server running at http://localhost:5000
+  📂 Uploads: /opt/editly/uploads
+  📤 Outputs: /opt/editly/outputs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 6: Allow Firewall Traffic (New Windows PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  gcloud compute firewall-rules create allow-editly --allow=tcp:5000 --source-ranges=0.0.0.0/0
+
+  ✅ Now the server is accessible from the internet
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 7: Get Your Public IP (Windows PowerShell)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  gcloud compute instances describe instance-20251117-105725 --zone=us-central1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+
+  ✅ You'll get something like: 35.xxx.xxx.xxx
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 8: OPEN IN BROWSER!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  http://35.xxx.xxx.xxx:5000
+
+  (Replace 35.xxx.xxx.xxx with your actual IP)
+
+  ✅ Your Editly web editor is LIVE!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BONUS: Keep Server Running After Disconnecting
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Instead of "node server.js", use:
+
+  nohup node server.js > server.log 2>&1 &
+
+  Then press Ctrl+C and close SSH. Server keeps running!
+
+  Later, to check logs:
+  tail -f server.log
+
+  Or use screen:
+  screen -S editly
+  node server.js
+  Press Ctrl+A then D to detach
+  Later: screen -r editly to reattach
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+THAT'S IT! 🎉
+
+Your video editor is now:
+  ✅ On the internet
+  ✅ Running 24/7
+  ✅ Accessible from anywhere
+  ✅ Ready to create videos!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Need help? See GOOGLE_CLOUD_DEPLOY_GUIDE.md for detailed instructions

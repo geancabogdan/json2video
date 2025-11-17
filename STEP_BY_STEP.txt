@@ -1,0 +1,253 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║        STEP-BY-STEP: Deploy Editly to Google Cloud (Follow This!)           ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Your Instance:
+  Name: instance-20251117-105725
+  Zone: us-central1-a
+  User: sos_sorin30
+  OS: Debian Linux
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ STEP 1: VERIFY LOCAL BUILD IS READY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your project is ALREADY BUILT! ✅
+
+Location: C:\Users\sorin\Desktop\json2video\dist\index.js
+
+Nothing to do here - moving to Step 2!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 STEP 2: COPY PROJECT TO GOOGLE CLOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What to do:
+  1. Open PowerShell (Windows)
+  2. Copy the entire command below
+  3. Paste it into PowerShell
+  4. Press Enter
+  5. Wait for files to upload (1-2 minutes)
+
+COMMAND TO PASTE:
+
+gcloud compute scp --recursive C:\Users\sorin\Desktop\json2video/* instance-20251117-105725:/opt/editly/ --zone=us-central1-a
+
+After this command:
+  • Files will upload to your cloud instance
+  • You'll see "Transfer complete" at the end
+  • Cloud instance now has your project files
+
+✅ STEP 2 COMPLETE when you see: "Transfer complete" or files listed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 STEP 3: SSH INTO YOUR CLOUD INSTANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What to do:
+  1. In the SAME PowerShell window
+  2. Copy the command below
+  3. Paste it
+  4. Press Enter
+  5. Answer "yes" to any prompts
+
+COMMAND TO PASTE:
+
+gcloud compute ssh instance-20251117-105725 --zone=us-central1-a
+
+After this command:
+  • You'll be connected to your cloud server
+  • Terminal will show: sos_sorin30@instance...~$
+  • You're now in Linux terminal (not Windows!)
+  • Everything below happens HERE in this SSH terminal
+
+✅ STEP 3 COMPLETE when you see the Linux prompt: sos_sorin30@instance...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 STEP 4: INSTALL DEPENDENCIES ON CLOUD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You're now in SSH! Run these commands ONE AT A TIME.
+
+Command 4a - Update system:
+
+sudo apt-get update -y
+
+Wait for it to finish (you'll see "done" message)
+
+---
+
+Command 4b - Install Node.js setup:
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+Wait for it to finish
+
+---
+
+Command 4c - Install Node.js and FFmpeg:
+
+sudo apt-get install -y nodejs ffmpeg
+
+Wait for it to finish (may take 1-2 minutes)
+
+---
+
+Verify installations worked:
+
+node --version
+
+Should show: v18.x.x (or higher)
+
+npm --version
+
+Should show: 8.x.x (or higher)
+
+ffmpeg -version
+
+Should show FFmpeg version info
+
+✅ STEP 4 COMPLETE when all three show versions
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 STEP 5: BUILD AND START THE SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Still in SSH terminal! Run these:
+
+Command 5a - Go to project:
+
+cd /opt/editly
+
+---
+
+Command 5b - Install dependencies:
+
+npm install
+
+Wait for it (may take 1-2 minutes)
+
+---
+
+Command 5c - Build project:
+
+npm run build
+
+Wait for it to complete
+
+---
+
+Command 5d - START THE SERVER:
+
+node server.js
+
+IMPORTANT: Wait for this message to appear:
+
+✨ Editly Web Server running at http://localhost:5000
+📂 Uploads: /opt/editly/uploads
+📤 Outputs: /opt/editly/outputs
+
+When you see this, the server is RUNNING!
+
+⚠️ IMPORTANT:
+  • Don't close this SSH window!
+  • Keep this terminal running
+  • Server needs to keep running
+  • Will use another PowerShell for next step
+
+✅ STEP 5 COMPLETE when you see the "Editly Web Server running" message
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 STEP 6: ALLOW FIREWALL ACCESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ DO NOT close your SSH window! It should still show the running server.
+
+Open a NEW PowerShell window (don't close the SSH one!)
+
+In NEW PowerShell, copy and paste:
+
+gcloud compute firewall-rules create allow-editly --allow=tcp:5000 --source-ranges=0.0.0.0/0
+
+You should see a success message.
+
+✅ STEP 6 COMPLETE when you see success message
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 7: GET YOUR PUBLIC IP ADDRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In the SAME NEW PowerShell window, copy and paste:
+
+gcloud compute instances describe instance-20251117-105725 --zone=us-central1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+
+You'll get an IP like: 35.xxx.xxx.xxx
+
+SAVE THIS IP! You'll need it in next step.
+
+✅ STEP 7 COMPLETE when you have your IP address
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 STEP 8: OPEN IN YOUR BROWSER!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open your web browser (Chrome, Firefox, Edge, etc.)
+
+In the address bar, type:
+
+http://35.xxx.xxx.xxx:5000
+
+Replace 35.xxx.xxx.xxx with YOUR actual IP from Step 7
+
+Example: http://35.184.15.33:5000
+
+Press Enter!
+
+You should see:
+  • Beautiful purple/blue interface
+  • Left panel: "Clips" button
+  • Center panel: "Visual Editor"
+  • Right panel: "Render Jobs"
+
+✅ STEP 8 COMPLETE - YOU'RE DONE! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎬 YOUR VIDEO EDITOR IS NOW LIVE!
+
+Try it out:
+  1. Click "+ Add Clip"
+  2. Choose "Solid Color"
+  3. Set color to #667EEA
+  4. Set duration to 3
+  5. Click "Render Video"
+  6. Download when done!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ KEEP SSH RUNNING
+
+The SSH terminal with "node server.js" should stay open!
+
+To keep server running after closing SSH:
+  1. In SSH, press Ctrl+C to stop server
+  2. Run: nohup node server.js > server.log 2>&1 &
+  3. Press Enter
+  4. Now you can close SSH, server keeps running
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Need help? Go back and re-read the step you're on.
+Follow the exact commands - they're copy-paste ready!
+
+Good luck! 🚀

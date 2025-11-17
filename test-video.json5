@@ -1,0 +1,44 @@
+{
+  // Simple test video configuration for Editly
+  width: 1280,
+  height: 720,
+  fps: 30,
+  duration: 5,
+
+  clips: [
+    {
+      // First clip: colored background with title text
+      duration: 2.5,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#1e88e5', // Blue background
+        },
+        {
+          type: 'title',
+          text: 'Welcome to Editly',
+          fontSize: 80,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        }
+      ]
+    },
+    {
+      // Second clip: different background with subtitle
+      duration: 2.5,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#43a047', // Green background
+        },
+        {
+          type: 'subtitle',
+          text: 'Video Created Programmatically',
+          fontSize: 60,
+          fontFamily: 'Arial',
+          color: '#ffffff',
+        }
+      ]
+    }
+  ]
+}

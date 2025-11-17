@@ -1,0 +1,280 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║         ☁️  DEPLOY USING GOOGLE CLOUD SHELL - Step by Step                 ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+CLOUD SHELL has gcloud pre-installed. Super fast!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 1: OPEN GOOGLE CLOUD CONSOLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. In your browser, go to:
+   https://console.cloud.google.com/
+
+2. Log in if needed (with your Google account)
+
+3. You should see the Google Cloud console dashboard
+
+✅ STEP 1 COMPLETE - You're in the console
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📟 STEP 2: OPEN CLOUD SHELL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Look at the TOP RIGHT of the console
+   - Find the ">_" button (looks like a terminal icon)
+   - It's next to the search box
+
+2. Click it
+   - A terminal panel opens at the BOTTOM of the screen
+   - You'll see a Linux prompt like: user@cloudshell:~$
+   - Wait a few seconds for it to load
+
+3. You're now in Cloud Shell!
+
+✅ STEP 2 COMPLETE - Cloud Shell terminal is open
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📤 STEP 3: UPLOAD YOUR PROJECT FILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Now upload your json2video project.
+
+Option A - If you have it as a ZIP file (Easiest):
+
+  1. On your Windows machine:
+     - Go to C:\Users\sorin\Desktop\json2video
+     - Select all files (Ctrl+A)
+     - Right-click → "Send to" → "Compressed folder"
+     - This creates json2video.zip
+     - Keep it on your desktop
+
+  2. In Cloud Shell, look for the "..." menu (three dots)
+     - It's usually in the top right of the Cloud Shell panel
+     - Click it
+     - Click "Upload file"
+     - Select json2video.zip from your desktop
+     - Wait for upload to complete (may take 1-2 minutes)
+
+Option B - If you prefer uploading the folder directly:
+
+  1. In Cloud Shell, click "..." menu
+  2. Click "Upload folder"
+  3. Select C:\Users\sorin\Desktop\json2video
+  4. Wait for upload
+
+3. Once uploaded, in Cloud Shell terminal, unzip if needed:
+   unzip json2video.zip
+
+4. Verify files are there:
+   ls -la
+
+   You should see your project files listed
+
+✅ STEP 3 COMPLETE - Files are in Cloud Shell
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 4: COPY FILES TO YOUR CLOUD INSTANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Cloud Shell terminal, paste this command:
+
+gcloud compute scp --recursive ./json2video/* instance-20251117-105725:/opt/editly/ --zone=us-central1-a
+
+What this does:
+  - Copies your project from Cloud Shell to your instance
+  - Creates /opt/editly folder with your files
+  - May take 1-2 minutes
+
+Wait for it to complete.
+
+✅ STEP 4 COMPLETE - Files copied to instance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 STEP 5: SSH INTO YOUR INSTANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In Cloud Shell terminal, paste:
+
+gcloud compute ssh instance-20251117-105725 --zone=us-central1-a
+
+You're now inside your cloud instance (Linux server)!
+
+Terminal prompt will change to something like: sos_sorin30@instance...
+
+✅ STEP 5 COMPLETE - You're SSH'd into instance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 STEP 6: INSTALL DEPENDENCIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You're in SSH now. Run these commands ONE AT A TIME.
+
+Command 6a - Update system:
+
+sudo apt-get update -y
+
+Wait for "done" message
+
+---
+
+Command 6b - Install Node.js setup:
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+Wait for it to finish
+
+---
+
+Command 6c - Install Node.js and FFmpeg:
+
+sudo apt-get install -y nodejs ffmpeg
+
+Wait for it (may take 1-2 minutes)
+
+---
+
+Verify it worked:
+
+node --version
+
+Should show v18.x.x or higher
+
+npm --version
+
+Should show 8.x.x or higher
+
+ffmpeg -version
+
+Should show FFmpeg version
+
+✅ STEP 6 COMPLETE - Dependencies installed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 STEP 7: BUILD AND START THE SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Still in SSH, run:
+
+cd /opt/editly
+
+---
+
+npm install
+
+Wait 1-2 minutes
+
+---
+
+npm run build
+
+Wait for it to complete
+
+---
+
+node server.js
+
+IMPORTANT: Wait for this message:
+
+✨ Editly Web Server running at http://localhost:5000
+📂 Uploads: /opt/editly/uploads
+📤 Outputs: /opt/editly/outputs
+
+When you see this, SERVER IS RUNNING! ✅
+
+⚠️ DO NOT CLOSE THIS SSH WINDOW - keep it running
+
+✅ STEP 7 COMPLETE - Server running
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 STEP 8: ALLOW FIREWALL ACCESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ DO NOT CLOSE SSH! Server should still be running there.
+
+Open a NEW Cloud Shell tab (don't close the SSH one!)
+
+In the NEW Cloud Shell (NOT the SSH one), paste:
+
+gcloud compute firewall-rules create allow-editly --allow=tcp:5000 --source-ranges=0.0.0.0/0
+
+You should see success message.
+
+✅ STEP 8 COMPLETE - Firewall configured
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 STEP 9: GET YOUR PUBLIC IP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In the SAME NEW Cloud Shell (the non-SSH one), paste:
+
+gcloud compute instances describe instance-20251117-105725 --zone=us-central1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+
+You'll get an IP like: 35.xxx.xxx.xxx
+
+SAVE THIS IP!
+
+✅ STEP 9 COMPLETE - You have your IP
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 STEP 10: OPEN IN YOUR BROWSER!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open a new browser tab
+
+2. Type in address bar:
+   http://35.xxx.xxx.xxx:5000
+
+   Replace 35.xxx.xxx.xxx with YOUR IP from Step 9
+   Example: http://35.184.15.33:5000
+
+3. Press Enter!
+
+4. You should see:
+   - Purple/blue interface
+   - "Clips" button on left
+   - "Visual Editor" in center
+   - "Render Jobs" on right
+
+✅ YOU'RE DONE! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎬 TRY YOUR VIDEO EDITOR!
+
+1. Click "+ Add Clip"
+2. Choose "Solid Color"
+3. Set color to #667EEA
+4. Duration: 3
+5. Click "Render Video"
+6. Download when done!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ KEEP SSH RUNNING!
+
+The first Cloud Shell tab (with SSH) should stay open - it keeps the server running!
+
+To keep it running even after closing Cloud Shell:
+  1. In SSH terminal, press Ctrl+C
+  2. Run: nohup node server.js > server.log 2>&1 &
+  3. Press Enter
+  4. Now you can close Cloud Shell
+
+The server will keep running in background!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ready? Let's go! Start with STEP 1!

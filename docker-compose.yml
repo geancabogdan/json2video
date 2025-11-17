@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  editly:
+    container_name: editly
+    image: editly/editly:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "outputs:/outputs"
+      - ./examples/assets/:/app/examples/assets/
+      - .:/app
+
+  editly-web:
+    container_name: editly-web
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./public:/app/public
+    working_dir: /app
+    command: npm run dev
+    restart: unless-stopped
+    depends_on:
+      - editly
+
+volumes:
+  outputs:

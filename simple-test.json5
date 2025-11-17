@@ -1,0 +1,41 @@
+{
+  // Simple test video - no external files needed
+  outPath: "./test-output.mp4",
+  width: 1280,
+  height: 720,
+  fps: 30,
+  duration: 3,
+
+  clips: [
+    {
+      duration: 1.5,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#FF6B6B',
+        },
+        {
+          type: 'title',
+          text: 'Editly Test',
+          fontSize: 100,
+          color: '#ffffff',
+        }
+      ]
+    },
+    {
+      duration: 1.5,
+      layers: [
+        {
+          type: 'fill-color',
+          color: '#4ECDC4',
+        },
+        {
+          type: 'subtitle',
+          text: 'Video Generation Success!',
+          fontSize: 60,
+          color: '#ffffff',
+        }
+      ]
+    }
+  ]
+}
