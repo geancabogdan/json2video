@@ -56,9 +56,23 @@ RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 # Final stage for app image
 FROM node:lts-bookworm
 
-# Install runtime dependencies
+# Install runtime dependencies (including build tools for canvas native bindings)
 RUN apt-get update -y \
-  && apt-get -y install ffmpeg dumb-init xvfb libcairo2 libpango1.0 libgif7 librsvg2-2 \
+  && apt-get -y install \
+    ffmpeg \
+    dumb-init \
+    xvfb \
+    libcairo2 \
+    libpango1.0 \
+    libgif7 \
+    librsvg2-2 \
+    build-essential \
+    libcairo2-dev \
+    libgif-dev \
+    libjpeg-dev \
+    libpango1.0-dev \
+    pkg-config \
+    python3 \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 WORKDIR /app
